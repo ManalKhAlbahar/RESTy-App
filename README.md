@@ -4,4 +4,4 @@
 being to add more functionality to the system as we go. This initial build sets up the file structure so that we can progressively build this application in a scalable 
 manner
 
-- PR[https://github.com/ManalKhAlbahar/resty/pull/1].
+- [PR](https://github.com/ManalKhAlbahar/resty/pull/1).
