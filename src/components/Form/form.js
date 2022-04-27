@@ -1,33 +1,41 @@
-import React from "react";
-import './form.css';
+import React, { useState } from 'react';
+import './form.scss';
 
 function Form(props){
-    const handleSubmit=e=>{
-        e.preventDefault();
-        const formData={
-method:'GET',
-url:'http://api.url.here',
-        };
-        props.handleApiCall(formData)
-    }
+  const [state, setState] = useState({methodstate: ''});
 
-    return(
-        <>
-        <form onSubmit={handleSubmit}>
+  function handleSubmit(e){
+    e.preventDefault();
+    const formData = {
+      method:state.methodstate,
+      url: 'https://reqres.in/api/users?page=2',
+    };
+    props.handleApiCall(formData);
+  }
+ 
+  function data(e,val){
+    e.preventDefault();
+    setState({methodstate:val})
+  }
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
         <label >
-            <span>URL: </span>
-            <input name='url' type='text' />
-            <button type="submit">GO!</button>
-          </label>
-          <label className="methods">
-            <span id="get">GET</span>
-            <span id="post">POST</span>
-            <span id="put">PUT</span>
-            <span id="delete">DELETE</span>
-          </label>
-        </form>
-        </>
-    )
+          <span>URL: </span>
+          <input name='url' type='text' />
+          <button type="submit" >GO!</button>
+        </label>
+        <label className="methods">
+          <button id="get" onClick={(e)=>data(e,'GET')} >GET</button>
+          <button id="post"  onClick={(e)=>data(e,'POST')} >POST</button>
+          <button id="put"  onClick={(e)=>data(e,'PUT')} >PUT</button>
+          <button id="delete"  onClick={(e)=>data(e,'DELETE')} >DELETE</button>
+        </label>
+      </form>
+       
+    </>
+  );
 }
+
 
 export default Form;
