@@ -1,23 +1,24 @@
 import './App.scss';
 import React, { useState } from 'react';
+import axios from 'axios'
 import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 import Form from './components/Form/form';
 import Results from './components/Results/results';
 
 
-function App(props) {
+function App(props){
 
-  const [state, setState] = useState({ data: '', requestParams: {} });
+  const [state, setState] = useState({data: '', requestParams:{}});
 
-  function callApi(requestParams) {
+ async function callApi(requestParams) {
+    const dataurl = await axios.get(requestParams.url);
+
     const data = {
-      count: 1,
-      results: [
-        { name: 'link 1', url: 'https://reqres.in/api/users?page=2' },
-      ],
+      headers: [dataurl.headers],
+      results: [dataurl.data.results],
     };
-    setState({ data, requestParams });
+    setState({data, requestParams});
   }
   return (
     <React.Fragment>
@@ -30,5 +31,4 @@ function App(props) {
     </React.Fragment>
   );
 }
-
 export default App;

@@ -1,12 +1,12 @@
-import React from 'react';
 
-function Results(props){
-  return (
-    <section>
-      <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
-    </section>
-  );
+import React from "react";
+
+function Result(props){
+    return(
+        <section>
+        <pre data-testid="resultTest">{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
+        </section>
+    );
 }
 
-
-export default Results;
+export default Result;
