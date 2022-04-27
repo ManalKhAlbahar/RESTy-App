@@ -1,45 +1,34 @@
-
-import './App.css';
-import Header from "./components/Header/header"
-import Footer from "./components/Footer/footer"
+import './App.scss';
+import React, { useState } from 'react';
+import Header from './components/Header/header';
+import Footer from './components/Footer/footer';
 import Form from './components/Form/form';
 import Results from './components/Results/results';
-import React from "react";
 
 
-class App extends React.Component {
+function App(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-    };
-  }
+  const [state, setState] = useState({ data: '', requestParams: {} });
 
-  callApi = (requestParams) => {
-    // mock output
+  function callApi(requestParams) {
     const data = {
-      count: 2,
+      count: 1,
       results: [
-        {name: 'here', url: 'http://api.url.here'},
+        { name: 'link 1', url: 'https://reqres.in/api/users?page=2' },
       ],
     };
-    this.setState({data, requestParams});
+    setState({ data, requestParams });
   }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
-        <Footer />
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Header />
+      <Form handleApiCall={callApi} />
+      <div>Request Method: {state.requestParams.method}</div>
+      <div>URL: {state.requestParams.url}</div>
+      <Results data={state.data} />
+      <Footer />
+    </React.Fragment>
+  );
 }
 
 export default App;
