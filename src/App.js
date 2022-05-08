@@ -44,7 +44,6 @@ function App() {
         });
         data = await response.json();
       } catch (e) {
-        console.log(e);
       }
     }
     if (method === 'put') {
@@ -67,7 +66,7 @@ function App() {
       setResult(data);
       setHeader(headerObject);
     } else {
-      setResult('please select method');
+      setResult('method select');
     }
     setLoading(false);
   }
