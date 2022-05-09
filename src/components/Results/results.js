@@ -1,12 +1,23 @@
+import './results.scss'
+import JSONPretty from 'react-json-pretty';
 
-import React from "react";
-
-function Result(props){
-    return(
-        <section>
-        <pre data-testid="resultTest">{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
-        </section>
+const Results = function (props) {
+  if (!props.loading) {
+    return (
+      <>
+        <div id='headers'>
+        <p>Headers</p>
+          <JSONPretty id='json-pretty' data={props.headers} />
+        </div>
+        <div id='results'>
+          <p>Result</p>
+          <JSONPretty id='json-pretty' data={props.url} />
+        </div>
+      </>
     );
-}
+  } else {
+    return <p>Loading </p>;
+  }
+};
 
-export default Result;
+export default Results;
