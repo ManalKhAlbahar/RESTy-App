@@ -1,29 +1,37 @@
+'use strict';
+
 const initialState = {
-    history: []
-}
-export default function historyReducer(state = initialState, action) {
-    const { type, payload1, payload2 } = action;
-    switch (type) {
-        case 'Add_History':
-            const history = [...state.history, payload1, payload2];
-            return { history: history };
-        case 'Empty_History':
-            return initialState;
-        default:
-            return state;
-    }
+  method: [],
+  URL: '',
+};
+
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'SET_METHOD':
+      return {
+        ...state,
+        method: action.payload,
+      };
+    case 'SET_URL':
+      return {
+        ...state,
+        URL: action.payload,
+      };
+    default:
+      return state;
+  }
 }
 
-export const addHistory = (history, result) => {
-    return {
-        type: 'Add_History',
-        payload1: history,
-        payload2: result
-    }
-}
+export const setMethod = (method) => {
+  return {
+    type: 'SET_METHOD',
+    payload: method,
+  };
+};
 
-export const emptyHistory = () => {
-    return {
-        type: 'Empty_History',
-    }
-}
+export const setURL = (URL) => {
+  return {
+    type: 'SET_URL',
+    payload: URL,
+  };
+};
