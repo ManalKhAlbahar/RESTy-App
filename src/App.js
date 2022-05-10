@@ -4,6 +4,12 @@ import Header from './components/Header/header';
 import Footer from './components/Footer/footer';
 import Form from './components/Form/form';
 import Results from './components/Results/results';
+import historyReducer, { addHistory, emptyHistory } from './components/Reducer/reducer';
+import History from './components/History/history';
+
+const initialState = {
+  history: []
+}
 
 
 function App() {
@@ -75,6 +81,7 @@ function App() {
     <>
       <Header />
       <Form onSubmit={onSubmit} updateMethod={updateMethod} handleObjectChange={handleObjectChange} />
+      {state.history.length ? <History history={state.history} /> : null}
       <Results method={method || ''} url={result || ''} headers={headers || ''} loading={loading} />
       <Footer />
     </>
