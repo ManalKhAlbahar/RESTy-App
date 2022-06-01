@@ -1,29 +1,42 @@
-const initialState = {
-    history: []
-}
-export default function historyReducer(state = initialState, action) {
-    const { type, payload1, payload2 } = action;
-    switch (type) {
-        case 'Add_History':
-            const history = [...state.history, payload1, payload2];
-            return { history: history };
-        case 'Empty_History':
-            return initialState;
-        default:
-            return state;
-    }
+const initialState={
+  methodUrl:[],
+  results:[]
 }
 
-export const addHistory = (history, result) => {
-    return {
-        type: 'Add_History',
-        payload1: history,
-        payload2: result
-    }
+export default function historyReducer(state=initialState,action){
+  const {type,payload}=action;
+  switch (type) {
+      case 'ADD_HISTORY':
+          const methodUrl = [...state.methodUrl,`${payload.method}:${payload.url}`];
+          const results= [...state.results,payload.results]
+          return{methodUrl:methodUrl,results:results};
+      case 'CLEAR_HISTORY':
+          const clearedMethodUrl=[];
+          const clearedResults=[]
+          return{methodUrl:clearedMethodUrl,results:clearedResults}
+      default:
+          return state;
+  }
+
 }
 
-export const emptyHistory = () => {
-    return {
-        type: 'Empty_History',
-    }
+export const addAction = (payLoad)=>{
+return {
+  type:'ADD_HISTORY',
+  payload:payLoad
+}
+}
+
+export const removeAction = (payLoad)=>{
+  return{
+      type:'REMOVE_HISTORY',
+      payload:payLoad
+  }
+}
+
+export const clearAction=()=>{
+  return{
+      type:'CLEAR_HISTORY',
+      payload:''
+  }
 }
